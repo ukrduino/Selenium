@@ -19,7 +19,7 @@ public class RegisterPage extends BasePage{
     public static final String REG_USER_CONF_PASSWORD_TEXT_FIELD_XPATH = "//input[@name='passwordConfirm']";
     public static final String REG_USER_ROLE_SELECT_XPATH = "//input[@name='role']";
     public static final String REG_USER_REGISTER_BUTTON_XPATH = "//div[@class='form']/form/input";
-    private WebDriver driver = BasePage.getDriver();
+
 
     @FindBy(xpath = REG_USER_NAME_TEXT_FIELD_XPATH)
     WebElement regUserNameTextField;

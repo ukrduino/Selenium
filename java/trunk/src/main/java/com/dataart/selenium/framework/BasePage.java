@@ -11,7 +11,4 @@ public class BasePage {
     public static <T extends BasePage> T initPage(Class<T> pageClass) {
         return PageFactory.initElements(driver, pageClass);
     }
-    public static WebDriver getDriver() {
-        return driver;
-    }
 }

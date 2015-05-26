@@ -13,7 +13,7 @@ public class UserBuilder {
     }
 
     public static User createUniqueUserWithRole(String role) {
-        String nowDateKey = Utils.nowDate();
+        String nowDateKey = Utils.getStringCurrentDateTime();
         String username = "RS_"+ nowDateKey;
         String password = "1234";
         User user = new User(username, password);

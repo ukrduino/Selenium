@@ -1,7 +1,9 @@
 package com.dataart.selenium.pages;
 
+import org.openqa.selenium.By;
+
 public class HomePage extends BasicPage {
-    public HeaderPage getHeader() {
-        return initPage(HeaderPage.class);
-    }
+    public final static By byHomePageTitle = By.xpath("//div[text()='Popular apps']");
+
 }
+

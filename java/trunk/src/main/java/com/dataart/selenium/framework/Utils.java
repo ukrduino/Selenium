@@ -34,9 +34,10 @@ public class Utils {
         return driver.findElement(By.xpath(xpath)).getText();
     }
 
-    //http://stackoverflow.com/questions/2942857/how-to-convert-current-date-into-string-in-java
+
+//http://stackoverflow.com/questions/2942857/how-to-convert-current-date-into-string-in-java
 //http://stackoverflow.com/a/11149783
-    public static String nowDate() {
+    public static String getStringCurrentDateTime() {
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_NOW);
 
