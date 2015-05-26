@@ -10,13 +10,13 @@ public class BaseTest {
         BasePage.driver = settings.getDriver();
         BasePage.settings = settings;
         BasePage.driver.get(settings.getBaseUrl());
-        if (!settings.getBrowser().equals(BrowserType.HTMLUNIT))
+        if (!settings.getBrowser().equals(BrowserType.HTMLUNIT)) {
             BasePage.driver.manage().window().maximize();
+        }
     }
 
     @AfterSuite(alwaysRun = true)
     public static void afterClass() {
-        BasePage.driver.close();
         BasePage.driver.quit();
 
     }

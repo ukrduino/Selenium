@@ -48,15 +48,9 @@ public class User {
         return role;
     }
 
-    //TODO Implement selection from select field
     public void setRole(String role) {
         this.role = role;
     }
-
-    //TODO Implement check of duplicating Username
-    //TODO Implement validation for UserFields
-    //TODO Implement possibility of creating admin user
-
 
 
 }

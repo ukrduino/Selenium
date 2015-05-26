@@ -12,6 +12,7 @@ import static com.dataart.selenium.framework.Utils.isElementPresent;
 import static com.dataart.selenium.models.UserBuilder.createUniqueUserWithRole;
 import static org.fest.assertions.Assertions.assertThat;
 import static com.dataart.selenium.framework.BasePage.initPage;
+import static org.testng.Assert.assertTrue;
 
 
 public class RegistrationTests extends BaseTest {
@@ -23,7 +24,7 @@ public class RegistrationTests extends BaseTest {
     private HeaderPage headerPage;
 
 
-    @BeforeMethod(alwaysRun = true)
+    @BeforeMethod(alwaysRun = true) //TODO
     public void openRegistrationPage() {
         BasicPage basicPage = initPage(BasicPage.class);
         LoginPage loginPage = basicPage.forceLogout();
@@ -35,7 +36,7 @@ public class RegistrationTests extends BaseTest {
     public void registerNewUserTestAndVerifyThatItIsLoggedIn() {
         User user = createUniqueUserWithRole(USER);
         HomePage onHomePage = onRegisterPage.registerNewUser(user);
-        assertHeader(user);
+        assertHeader(user); //TODO
         onHomePage.forceLogout();
     }
 
@@ -45,7 +46,7 @@ public class RegistrationTests extends BaseTest {
         HomePage onHomePage = onRegisterPage.registerNewUser(user);
         LoginPage onLoginPage = onHomePage.forceLogout();
         onLoginPage.loginAs(user);
-        assertHeader(user);
+        assertHeader(user); //TODO
         onHomePage.forceLogout();
     }
 
@@ -53,7 +54,7 @@ public class RegistrationTests extends BaseTest {
     public void registerAsDeveloperVerifyUserCanOpenPageToUploadApplication() {
         User user = createUniqueUserWithRole(DEVELOPER);
         HomePage onHomePage = onRegisterPage.registerNewUser(user);
-        HeaderPage onHeader = onHomePage.getHeader();
+        HeaderPage onHeader = onHomePage.onHeader();
         MyApplicationsPage onMyApplicationsPage = onHeader.toMyApplicationsPage();
         NewAppPage onNewAppPage = onMyApplicationsPage.toNewAppPage();
         System.out.println(isElementPresent(onNewAppPage.byPageTitle));
@@ -68,16 +69,14 @@ public class RegistrationTests extends BaseTest {
     }
 
     @Test
-    public void registerRegularUserVerifyUserCanSeeApplicationsButCannotUploadThemTest() {
+    public void registerUserAndVerifyAccessToApplications() {
         User user = createUniqueUserWithRole(USER);
         HomePage onHomePage = onRegisterPage.registerNewUser(user);
-        HeaderPage onHeader = onHomePage.getHeader();
-        assertThat(isElementPresent(onHomePage.byHomePageTitle)).isTrue();
-        assertThat(isElementPresent(onHeader.byMyApplicationsLink)).isFalse();
-        onHomePage.forceLogout();
+        HeaderPage onHeader = onHomePage.onHeader();
+        assertTrue(isElementPresent(onHomePage.homePageTitle), "Home page title is not present");
+        assertThat(isElementPresent(onHeader.myApplicationsLink)).isFalse();//TODO
+
     }
 
-    private void assertHeader(User user){
-        assertThat(headerPage.getWelcomeMessage()).isEqualTo("Welcome " + user.getFname() + " " + user.getLname());
-    }
+
 }

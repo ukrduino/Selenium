@@ -26,7 +26,7 @@ public class BasicPage extends BasePage {
         return null;
     }
 
-    public HeaderPage getHeader() {
+    public HeaderPage onHeader() {
         return initPage(HeaderPage.class);
     }
 
