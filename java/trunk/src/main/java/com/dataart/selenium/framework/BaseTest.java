@@ -17,5 +17,7 @@ public class BaseTest {
     @AfterSuite(alwaysRun = true)
     public static void afterClass() {
         BasePage.driver.close();
+        BasePage.driver.quit();
+
     }
 }

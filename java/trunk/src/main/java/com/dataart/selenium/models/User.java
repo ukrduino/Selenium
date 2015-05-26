@@ -4,6 +4,8 @@ public class User {
     private String username;
     private String password;
     private String fname, lname;
+    private String role;
+
 
     public User(String username, String password) {
         this.username = username;
@@ -41,5 +43,20 @@ public class User {
     public void setLname(String lname) {
         this.lname = lname;
     }
+
+    public String getRole() {
+        return role;
+    }
+
+    //TODO Implement selection from select field
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    //TODO Implement check of duplicating Username
+    //TODO Implement validation for UserFields
+    //TODO Implement possibility of creating admin user
+
+
 
 }
