@@ -10,7 +10,7 @@ import static com.dataart.selenium.pages.BasePage.*;
 import static org.testng.Assert.*;
 
 
-public class LoginTest extends BaseTest {
+public class LoginTests extends BaseTest {
 
     private LoginPage onLoginPage;
     private HeaderPage onHeader;

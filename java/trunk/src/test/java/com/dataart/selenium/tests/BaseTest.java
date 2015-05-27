@@ -5,6 +5,7 @@ import com.dataart.selenium.framework.Settings;
 import com.dataart.selenium.pages.*;
 import org.testng.annotations.*;
 
+
 public class BaseTest {
     private static Settings settings = new Settings();
 
@@ -18,9 +19,8 @@ public class BaseTest {
         }
     }
 
-    @AfterSuite(alwaysRun = true)
-    public static void afterClass() {
-        BasePage.driver.quit();
-
-    }
+//    @AfterSuite(alwaysRun = true)
+//    public static void afterClass() {
+//        BasePage.driver.quit();
+//    }
 }

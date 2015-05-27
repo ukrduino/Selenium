@@ -28,7 +28,7 @@ public class RegistrationTests extends BaseTest {
 
     @AfterMethod(alwaysRun = true)
     public void openLoginPage() {
-        onLoginPage = onHeader.forceLogout();
+        onHeader.forceLogout();
     }
 
     @Test
