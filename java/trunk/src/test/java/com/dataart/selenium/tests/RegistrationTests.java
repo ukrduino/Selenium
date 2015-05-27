@@ -1,80 +1,70 @@
 package com.dataart.selenium.tests;
 
-import com.dataart.selenium.framework.BaseTest;
-import com.dataart.selenium.models.User;
+import com.dataart.selenium.models.*;
 import com.dataart.selenium.pages.*;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 
-import static com.dataart.selenium.framework.BasePage.driver;
+import static com.dataart.selenium.pages.BasePage.*;
 import static com.dataart.selenium.framework.Utils.isElementPresent;
 import static com.dataart.selenium.models.UserBuilder.createUniqueUserWithRole;
-import static org.fest.assertions.Assertions.assertThat;
-import static com.dataart.selenium.framework.BasePage.initPage;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 
 public class RegistrationTests extends BaseTest {
 
-    public final String DEVELOPER = "DEVELOPER";
-    public final String USER = "USER";
+    private HeaderPage onHeader;
+    private LoginPage onLoginPage;
+    private NewAppPage onNewAppPage;
+    private HomePage onHomePage;
+    private User user;
 
-    private RegisterPage onRegisterPage;
-    private HeaderPage headerPage;
 
+    @BeforeClass(alwaysRun = true)
+    public void testSetup() {
+        onHeader = initPage(HeaderPage.class);
+        onLoginPage = onHeader.forceLogout();
+    }
 
-    @BeforeMethod(alwaysRun = true) //TODO
-    public void openRegistrationPage() {
-        BasicPage basicPage = initPage(BasicPage.class);
-        LoginPage loginPage = basicPage.forceLogout();
-        onRegisterPage = loginPage.toRegisterPage();
-        headerPage = initPage(HeaderPage.class);
+    @AfterMethod(alwaysRun = true)
+    public void openLoginPage() {
+        onLoginPage = onHeader.forceLogout();
     }
 
     @Test
     public void registerNewUserTestAndVerifyThatItIsLoggedIn() {
-        User user = createUniqueUserWithRole(USER);
-        HomePage onHomePage = onRegisterPage.registerNewUser(user);
-        assertHeader(user); //TODO
-        onHomePage.forceLogout();
+        user = createUniqueUserWithRole(UserRoles.USER);
+        onLoginPage.clickToRegisterPage().registerNewUser(user);
+        onHeader.assertHeader(user);
     }
 
     @Test
     public void registerNewUserLogoutAndVerifyThatUserCanLoginTest() {
-        User user = createUniqueUserWithRole(USER);
-        HomePage onHomePage = onRegisterPage.registerNewUser(user);
-        LoginPage onLoginPage = onHomePage.forceLogout();
-        onLoginPage.loginAs(user);
-        assertHeader(user); //TODO
-        onHomePage.forceLogout();
+        user = createUniqueUserWithRole(UserRoles.USER);
+        onLoginPage.clickToRegisterPage().registerNewUser(user);
+        onHeader.forceLogout().loginAs(user);
+        onHeader.assertHeader(user);
     }
 
     @Test
     public void registerAsDeveloperVerifyUserCanOpenPageToUploadApplication() {
-        User user = createUniqueUserWithRole(DEVELOPER);
-        HomePage onHomePage = onRegisterPage.registerNewUser(user);
-        HeaderPage onHeader = onHomePage.onHeader();
-        MyApplicationsPage onMyApplicationsPage = onHeader.toMyApplicationsPage();
-        NewAppPage onNewAppPage = onMyApplicationsPage.toNewAppPage();
-        System.out.println(isElementPresent(onNewAppPage.byPageTitle));
-        assertThat(isElementPresent(onNewAppPage.byNewAppTitle)).isTrue();
-        assertThat(isElementPresent(onNewAppPage.byNewAppDescription)).isTrue();
-        assertThat(isElementPresent(onNewAppPage.byNewAppImageBrowseButton)).isTrue();
-        assertThat(isElementPresent(onNewAppPage.byNewAppIconBrowseButton)).isTrue();
-        assertThat(isElementPresent(onNewAppPage.byCreateNewButton)).isTrue();
-        assertThat(driver.findElement(onNewAppPage.byPageTitle).getText().equals("New application"));
-        onNewAppPage.forceLogout();
-
+        user = createUniqueUserWithRole(UserRoles.DEVELOPER);
+        onLoginPage.clickToRegisterPage().registerNewUser(user);
+        onHeader.clickYoMyApplicationsPage().clickToNewAppPage();
+        assertTrue(isElementPresent(onNewAppPage.byPageTitle));
+        assertTrue(isElementPresent(onNewAppPage.byNewAppTitle));
+        assertTrue(isElementPresent(onNewAppPage.byNewAppDescription));
+        assertTrue(isElementPresent(onNewAppPage.byNewAppImageBrowseButton));
+        assertTrue(isElementPresent(onNewAppPage.byNewAppIconBrowseButton));
+        assertTrue(isElementPresent(onNewAppPage.byCreateNewButton));
     }
 
     @Test
     public void registerUserAndVerifyAccessToApplications() {
-        User user = createUniqueUserWithRole(USER);
-        HomePage onHomePage = onRegisterPage.registerNewUser(user);
-        HeaderPage onHeader = onHomePage.onHeader();
-        assertTrue(isElementPresent(onHomePage.homePageTitle), "Home page title is not present");
-        assertThat(isElementPresent(onHeader.myApplicationsLink)).isFalse();//TODO
+        user = createUniqueUserWithRole(UserRoles.USER);
+        onLoginPage.clickToRegisterPage().registerNewUser(user);
+        assertTrue(isElementPresent(onHomePage.pageTitle), "Home page title is not present !!!");
+        assertFalse(isElementPresent(onHeader.myApplicationsLink), "User has myApplicationsLink !!!");
 
     }
 

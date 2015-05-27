@@ -4,10 +4,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
-import com.dataart.selenium.framework.Utils;
 
 
-public class NewAppPage extends BasicPage{
+public class NewAppPage extends BasePage{
 
     public final static By byPageTitle = By.xpath("//div[@class='content']/h1");
     public final static By byNewAppTitle = By.name("title");

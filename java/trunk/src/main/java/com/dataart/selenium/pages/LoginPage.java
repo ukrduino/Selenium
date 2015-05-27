@@ -1,6 +1,5 @@
 package com.dataart.selenium.pages;
 
-import com.dataart.selenium.framework.BasePage;
 import com.dataart.selenium.models.User;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -30,7 +29,7 @@ public class LoginPage extends BasePage {
         return initPage(HomePage.class);
     }
 
-    public RegisterPage toRegisterPage() {
+    public RegisterPage clickToRegisterPage() {
         regUserLink.click();
         return initPage(RegisterPage.class);
     }

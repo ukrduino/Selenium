@@ -1,7 +1,7 @@
 package com.dataart.selenium.models;
 
-
 import com.dataart.selenium.framework.Utils;
+
 
 public class UserBuilder {
 
@@ -12,7 +12,7 @@ public class UserBuilder {
         return user;
     }
 
-    public static User createUniqueUserWithRole(String role) {
+    public static User createUniqueUserWithRole(UserRoles role) {
         String nowDateKey = Utils.getStringCurrentDateTime();
         String username = "RS_"+ nowDateKey;
         String password = "1234";

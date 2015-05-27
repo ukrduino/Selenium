@@ -4,7 +4,7 @@ public class User {
     private String username;
     private String password;
     private String fname, lname;
-    private String role;
+    private UserRoles role;
 
 
     public User(String username, String password) {
@@ -45,10 +45,10 @@ public class User {
     }
 
     public String getRole() {
-        return role;
+        return role.name();
     }
 
-    public void setRole(String role) {
+    public void setRole(UserRoles role) {
         this.role = role;
     }
 

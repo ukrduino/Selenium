@@ -1,5 +1,8 @@
-package com.dataart.selenium.framework;
+package com.dataart.selenium.tests;
 
+import com.dataart.selenium.framework.BrowserType;
+import com.dataart.selenium.framework.Settings;
+import com.dataart.selenium.pages.*;
 import org.testng.annotations.*;
 
 public class BaseTest {

@@ -1,57 +1,55 @@
 package com.dataart.selenium.tests;
 
-import com.dataart.selenium.framework.BaseTest;
 import com.dataart.selenium.models.User;
-import com.dataart.selenium.pages.BasicPage;
-import com.dataart.selenium.pages.HeaderPage;
-import com.dataart.selenium.pages.LoginPage;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import com.dataart.selenium.pages.*;
+import org.testng.annotations.*;
 
 import static com.dataart.selenium.framework.Utils.isElementPresent;
 import static com.dataart.selenium.models.UserBuilder.admin;
-import static org.fest.assertions.Assertions.assertThat;
-import static com.dataart.selenium.framework.BasePage.initPage;
+import static com.dataart.selenium.pages.BasePage.*;
+import static org.testng.Assert.*;
+
 
 public class LoginTest extends BaseTest {
 
-    private LoginPage loginPage;
-    private BasicPage basicPage;
-    private HeaderPage headerPage;
+    private LoginPage onLoginPage;
+    private HeaderPage onHeader;
     private User user;
+
+    @BeforeClass(alwaysRun = true)
+    public void testSetup() {
+        onHeader = initPage(HeaderPage.class);
+        user = admin();
+    }
 
     @BeforeMethod(alwaysRun = true)
     public void openLoginPage() {
-        basicPage = initPage(BasicPage.class);
-        loginPage = basicPage.forceLogout();
-        headerPage = initPage(HeaderPage.class);
-        user = admin();
+        onLoginPage = onHeader.forceLogout();
     }
 
     @Test
     public void correctLoginTest() {
-        loginPage.loginAs(user);
-        assertHeader(user);
+        onLoginPage.loginAs(user);
+        onHeader.assertHeader(user);
     }
 
     @Test
     public void incorrectLoginTest() {
         user.setPassword(user.getPassword() + user.getPassword());
-        loginPage.loginAs(user);
-        assertThat(isElementPresent(basicPage.flash)).isTrue();
-        assertThat(basicPage.getFlashMessage()).isEqualTo("You have entered an invalid username or password!");
+        onLoginPage.loginAs(user);
+        assertTrue(isElementPresent(flash), "flash in not present");
+        assertTrue(getFlashMessage().equals("You have entered an invalid username or password!"),
+                "flash message is wrong");
     }
 
     @Test
     public void incorrectThenCorrectTest() {
         user.setPassword(user.getPassword() + user.getPassword());
-        loginPage.loginAs(user);
+        onLoginPage.loginAs(user);
         user.setPassword(admin().getPassword());
-        loginPage.loginAs(user);
-        assertHeader(user);
+        onLoginPage.loginAs(user);
+        onHeader.assertHeader(user);
     }
 
-    private void assertHeader(User user){
-        assertThat(headerPage.getWelcomeMessage()).isEqualTo("Welcome " + user.getFname() + " " + user.getLname());
-    }
+
 }
