@@ -33,6 +33,11 @@ public class HeaderPage extends BasePage {
         return initPage(AjaxPage.class);
     }
 
+    public JSPage clickJSTestPageLink(){
+        driver.findElement(By.xpath("//a[text()='JS test page']")).click();
+        return initPage(JSPage.class);
+    }
+
     public void assertHeader(User user){
         assertTrue("WelcomeMessage is wrong!!!", getWelcomeMessage().equals("Welcome " + user.getFname() + " " + user.getLname()));
     }

@@ -8,8 +8,6 @@ import org.testng.annotations.*;
 
 import java.io.File;
 
-//import static com.dataart.selenium.framework.Utils.isElementPresent;
-//import static com.dataart.selenium.pages.BasePage.driver;
 import static com.dataart.selenium.pages.BasePage.getFlashMessage;
 import static org.testng.Assert.*;
 
