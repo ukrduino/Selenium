@@ -1,21 +1,28 @@
 package com.dataart.selenium.models;
 
+import com.dataart.selenium.framework.Utils;
+
+
 public class ApplicationBuilder {
 
-//    public static Application createApplicationWithCategory(ApplicationCategories category) {
-//        String nowDateKey = Utils.getStringCurrentDateTime();
-//        String username = "RS_"+ nowDateKey;
-//        String password = "1234";
-//        Application application = new Application(username, password);
-//        user.setFname("Sergey_" + nowDateKey);
-//        user.setLname("Romanyuk_"+ nowDateKey);
-//        user.setRole(role);
-//        System.out.println("New USER");
-//        System.out.println(user.getUsername());
-//        System.out.println(user.getFname());
-//        System.out.println(user.getLname());
-//        System.out.println(user.getPassword());
-//        System.out.println(user.getRole());
-//        return application;
-//    }
+    public static Application createNewAppModel() {
+        String nowDateKey = Utils.getStringCurrentDateTime();
+        Application newAppModel = new Application();
+        newAppModel.setAppTitle("Selenium "+nowDateKey);
+        newAppModel.setAppDescription("Super web testing framework !!!");
+        newAppModel.setCategory(ApplicationCategories.Development);
+        return newAppModel;
+    }
+
+    public static Application createNewAppModelWith(String imagePath) {
+        String nowDateKey = Utils.getStringCurrentDateTime();
+        Application newAppModel = new Application();
+        newAppModel.setAppTitle("Selenium "+nowDateKey);
+        newAppModel.setAppDescription("Super web testing framework !!!");
+        newAppModel.setCategory(ApplicationCategories.Development);
+        newAppModel.setIconPath(imagePath);
+        newAppModel.setImagePath(imagePath);
+        return newAppModel;
+    }
+
 }

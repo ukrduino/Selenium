@@ -50,13 +50,13 @@ public class RegistrationTests extends BaseTest {
     public void registerAsDeveloperVerifyUserCanOpenPageToUploadApplication() {
         user = createUniqueUserWithRole(UserRoles.DEVELOPER);
         onLoginPage.clickToRegisterPage().registerNewUser(user);
-        onHeader.clickYoMyApplicationsPage().clickToNewAppPage();
-        assertTrue(isElementPresent(onNewAppPage.byPageTitle));
-        assertTrue(isElementPresent(onNewAppPage.byNewAppTitle));
-        assertTrue(isElementPresent(onNewAppPage.byNewAppDescription));
-        assertTrue(isElementPresent(onNewAppPage.byNewAppImageBrowseButton));
-        assertTrue(isElementPresent(onNewAppPage.byNewAppIconBrowseButton));
-        assertTrue(isElementPresent(onNewAppPage.byCreateNewButton));
+        onNewAppPage = onHeader.clickMyApplicationsLink().clickToNewAppPage();
+        assertTrue(onNewAppPage.getPageTitle().equals("New application"));
+        assertTrue(isElementPresent(onNewAppPage.NewAppTitle));
+        assertTrue(isElementPresent(onNewAppPage.NewAppDescription));
+        assertTrue(isElementPresent(onNewAppPage.NewAppImageBrowseButton));
+        assertTrue(isElementPresent(onNewAppPage.NewAppIconBrowseButton));
+        assertTrue(isElementPresent(onNewAppPage.CreateNewButton));
     }
 
     @Test

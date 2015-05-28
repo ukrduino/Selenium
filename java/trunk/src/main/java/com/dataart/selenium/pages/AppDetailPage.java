@@ -1,12 +1,11 @@
 package com.dataart.selenium.pages;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import com.dataart.selenium.framework.Utils;
 
 
 public class AppDetailPage extends BasePage {
-
 
     @FindBy(className = "name")
     WebElement appTitle;
@@ -21,7 +20,7 @@ public class AppDetailPage extends BasePage {
     WebElement author;
 
     @FindBy(xpath="//div[@class='downloads']")
-    WebElement downloads;
+    WebElement numberOfDownloads;
 
     @FindBy(xpath="//div[@class='download-button']/a")
     WebElement downloadButton;
@@ -49,7 +48,7 @@ public class AppDetailPage extends BasePage {
     }
 
     public String getNumberOfDownloads() {
-        return downloads.getText().replace("# of downloads: ","");
+        return numberOfDownloads.getText().replace("# of downloads: ","");
     }
 
     public DownloadPage clickDownloadButton() {
@@ -57,4 +56,14 @@ public class AppDetailPage extends BasePage {
         return initPage(DownloadPage.class);
     }
 
+    public EditAppPage clickEditButton() {
+        editButton.click();
+        return initPage(EditAppPage.class);
+    }
+
+    public void clickDeleteButton() {
+        deleteButton.click();
+        Alert alert = driver.switchTo().alert();
+        alert.accept();
+    }
 }

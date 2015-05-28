@@ -18,9 +18,14 @@ public class HeaderPage extends BasePage {
         return driver.findElement(By.xpath("//div[@class='header']/div[@class='welcome']")).getText();
     }
 
-    public MyApplicationsPage clickYoMyApplicationsPage() {
+    public MyApplicationsPage clickMyApplicationsLink() {
         driver.findElement(myApplicationsLink).click();
         return initPage(MyApplicationsPage.class);
+    }
+
+    public HomePage clickToHomePageLink(){
+        driver.findElement(By.xpath("//a[text()='Home']")).click();
+        return initPage(HomePage.class);
     }
 
     public void assertHeader(User user){

@@ -3,14 +3,9 @@ package com.dataart.selenium.models;
 public class User {
     private String username;
     private String password;
-    private String fname, lname;
+    private String fname;
+    private String lname;
     private UserRoles role;
-
-
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
 
     public String getUsername() {
         return username;
