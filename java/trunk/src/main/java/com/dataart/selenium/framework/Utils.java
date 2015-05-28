@@ -17,10 +17,12 @@ public class Utils {
     // for creating nowDateKey
     public static final String DATE_FORMAT_NOW = "yy-MM-dd HH:mm:ss";
 
-    public static void waitForElementPresent(String xpath) {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        WebElement element = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+    public static WebElement elementByXpathIfPresentInSeconds(String xpath, Integer secondsToWait) {
+        WebDriverWait wait = new WebDriverWait(driver, secondsToWait);
+        WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpath)));
+        System.out.println(element.getText());
+
+        return element;
     }
 
     public static boolean isElementPresent(String xpath) {

@@ -23,9 +23,14 @@ public class HeaderPage extends BasePage {
         return initPage(MyApplicationsPage.class);
     }
 
-    public HomePage clickToHomePageLink(){
+    public HomePage clickHomePageLink(){
         driver.findElement(By.xpath("//a[text()='Home']")).click();
         return initPage(HomePage.class);
+    }
+
+    public AjaxPage clickAjaxTestPageLink(){
+        driver.findElement(By.xpath("//a[text()='Ajax test page']")).click();
+        return initPage(AjaxPage.class);
     }
 
     public void assertHeader(User user){

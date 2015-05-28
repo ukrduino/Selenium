@@ -8,8 +8,8 @@ import org.testng.annotations.*;
 
 import java.io.File;
 
-import static com.dataart.selenium.framework.Utils.isElementPresent;
-import static com.dataart.selenium.pages.BasePage.driver;
+//import static com.dataart.selenium.framework.Utils.isElementPresent;
+//import static com.dataart.selenium.pages.BasePage.driver;
 import static com.dataart.selenium.pages.BasePage.getFlashMessage;
 import static org.testng.Assert.*;
 
@@ -41,7 +41,7 @@ public class ApplicationTests extends BaseTest {
 
     @BeforeMethod(alwaysRun = true)
     public void backToHomePage () {
-        onHeader.clickToHomePageLink();
+        onHeader.clickHomePageLink();
     }
 
     @Test
@@ -110,7 +110,7 @@ public class ApplicationTests extends BaseTest {
                 ApplicationCategories.Maps);
         assertTrue(getFlashMessage().contains("Application edited"),
                 "Edit Application flash message is wrong");
-        onAppDetailPage =onHeader.clickToHomePageLink().openApplicationWithTitle(nameOfAppWeWantToEdit);
+        onAppDetailPage =onHeader.clickHomePageLink().openApplicationWithTitle(nameOfAppWeWantToEdit);
         assertTrue(onAppDetailPage.getAppDescription().equals(newAppDescription));
         assertTrue(onAppDetailPage.getCategory().equals(ApplicationCategories.Maps.name()));
 
@@ -146,7 +146,7 @@ public class ApplicationTests extends BaseTest {
             BasePage.driver.navigate().back();
             x++;
         }
-        onHeader.clickToHomePageLink();
+        onHeader.clickHomePageLink();
         assertTrue(BasePage
                 .driver.findElements(By
                         .xpath("//div[@class='popular-app']/a[div[text()='"
@@ -171,7 +171,7 @@ public class ApplicationTests extends BaseTest {
 
         assertTrue(getFlashMessage().contains("Deleted"),
                 "Deleted flash message is wrong or absent");
-        onHeader.clickToHomePageLink();
+        onHeader.clickHomePageLink();
         String findAppByTitleXPath = "//div[*[contains(.,'"+newAppModel.getAppTitle()+"')]]";
         assertFalse(BasePage.driver.findElements(By.xpath(findAppByTitleXPath)).size() > 0);
 
