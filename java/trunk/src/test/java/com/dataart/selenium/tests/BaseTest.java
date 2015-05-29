@@ -21,8 +21,8 @@ public class BaseTest {
 
     }
 
-//    @AfterSuite(alwaysRun = true)
-//    public static void afterClass() {
-//        BasePage.driver.quit();
-//    }
+    @AfterSuite(alwaysRun = true)
+    public static void afterClass() {
+        BasePage.driver.quit();
+    }
 }
