@@ -1,8 +1,12 @@
 package com.dataart.selenium.pages;
 
 import com.dataart.selenium.models.User;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.security.UserAndPassword;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPage extends BasePage {
 
@@ -28,6 +32,7 @@ public class LoginPage extends BasePage {
         loginButton.click();
         return initPage(HomePage.class);
     }
+
 
     public RegisterPage clickToRegisterPage() {
         regUserLink.click();

@@ -8,8 +8,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 // GET DATE & TIME IN ANY FORMAT
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 public class Utils {
 
@@ -46,6 +51,7 @@ public class Utils {
 
         return sdf.format(cal.getTime()).replaceAll("[^a-zA-Z0-9]", "");
     }
+
 
 }
 

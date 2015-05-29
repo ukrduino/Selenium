@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.*;
 import java.util.Properties;
@@ -90,9 +91,20 @@ public class Settings {
             case FIREFOX:
                 return new FirefoxDriver();
             case IE:
-                return new InternetExplorerDriver();
+                DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
+//                capabilities.setCapability(InternetExplorerDriver.INITIAL_BROWSER_URL, "http://www.google.com/");
+                capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+                ClassLoader classLoaderIE = getClass().getClassLoader();
+                File fileIE = new File(classLoaderIE.getResource("IEDriverServer.exe").getFile());
+                System.setProperty("webdriver.ie.driver", fileIE.getAbsolutePath());
+                WebDriver driverIE = new InternetExplorerDriver(capabilities);
+                return driverIE;
             case GC:
-                return new ChromeDriver();
+                ClassLoader classLoaderGC = getClass().getClassLoader();
+                File fileGC = new File(classLoaderGC.getResource("chromedriver.exe").getFile());
+                System.setProperty("webdriver.chrome.driver", fileGC.getAbsolutePath());
+                WebDriver driverGC = new ChromeDriver();
+                return driverGC;
             case OPERA:
                 return new OperaDriver();
             case HTMLUNIT:

@@ -9,6 +9,7 @@ import org.testng.annotations.*;
 public class BaseTest {
     private static Settings settings = new Settings();
 
+
     @BeforeSuite(alwaysRun = true)
     public static void beforeSuite() {
         BasePage.driver = settings.getDriver();
@@ -17,6 +18,7 @@ public class BaseTest {
         if (!settings.getBrowser().equals(BrowserType.HTMLUNIT)) {
             BasePage.driver.manage().window().maximize();
         }
+
     }
 
 //    @AfterSuite(alwaysRun = true)
