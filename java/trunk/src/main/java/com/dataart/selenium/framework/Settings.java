@@ -91,13 +91,10 @@ public class Settings {
             case FIREFOX:
                 return new FirefoxDriver();
             case IE:
-                DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
-//                capabilities.setCapability(InternetExplorerDriver.INITIAL_BROWSER_URL, "http://www.google.com/");
-                capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
                 ClassLoader classLoaderIE = getClass().getClassLoader();
                 File fileIE = new File(classLoaderIE.getResource("IEDriverServer.exe").getFile());
                 System.setProperty("webdriver.ie.driver", fileIE.getAbsolutePath());
-                WebDriver driverIE = new InternetExplorerDriver(capabilities);
+                WebDriver driverIE = new InternetExplorerDriver();
                 return driverIE;
             case GC:
                 ClassLoader classLoaderGC = getClass().getClassLoader();
